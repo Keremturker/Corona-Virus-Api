@@ -7,12 +7,12 @@
 
     <fragment
         android:id="@+id/fragmentList"
-        android:name="com.keremturker.coronavirusapi.ui.fragment.FragmentList"
+        android:name="com.keremturker.coronavirusapi.ui.fragment.list.FragmentList"
         android:label="fragment_list"
         tools:layout="@layout/fragment_list" />
     <fragment
         android:id="@+id/fragmentDetail"
-        android:name="com.keremturker.coronavirusapi.ui.fragment.FragmentDetail"
+        android:name="com.keremturker.coronavirusapi.ui.fragment.detail.FragmentDetail"
         android:label="fragment_detail"
         tools:layout="@layout/fragment_detail" />
 
