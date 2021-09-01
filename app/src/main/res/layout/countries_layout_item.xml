@@ -7,8 +7,8 @@
     android:layout_margin="8dp"
     android:clickable="true"
     android:focusable="true"
-    app:cardCornerRadius="8dp"
-    android:foreground="?attr/selectableItemBackground">
+    android:foreground="?attr/selectableItemBackground"
+    app:cardCornerRadius="8dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -16,21 +16,45 @@
         android:layout_margin="8dp">
 
         <TextView
-            android:id="@+id/txtCountryName"
-            android:layout_width="match_parent"
+            android:id="@+id/txtCountryNameTitle"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:text="@string/country_name"
+            android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/txtCountryName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="8dp"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/txtCountryNameTitle"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Turkey" />
 
         <TextView
-            android:id="@+id/txtTotalCase"
-            android:layout_width="match_parent"
+            android:id="@+id/txtTotalCaseTitle"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:text="@string/total_case"
+            android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/txtTotalCase" />
+
+        <TextView
+            android:id="@+id/txtTotalCase"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="8dp"
+            android:layout_marginTop="8dp"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/txtTotalCaseTitle"
             app:layout_constraintTop_toBottomOf="@id/txtCountryName"
             tools:text="120.000" />
 

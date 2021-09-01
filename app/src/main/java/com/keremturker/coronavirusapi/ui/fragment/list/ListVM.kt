@@ -34,8 +34,8 @@ class ListVM
         getList()
     }
 
-    fun getList(loadingProgress: Boolean = true) {
-        _onLoading.postValue(loadingProgress)
+    fun getList() {
+        _onLoading.postValue(true)
         viewModelScope.launch {
             var result: Result<CountriesDataResponse>? = null
             try {

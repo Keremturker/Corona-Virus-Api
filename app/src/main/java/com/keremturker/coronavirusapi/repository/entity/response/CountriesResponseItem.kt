@@ -15,8 +15,8 @@ data class CountriesResponseItem(
     val newDeaths: String,
     @SerializedName("totalRecovered")
     val totalRecovered: String,
-    @SerializedName("totalcases")
-    val totalcases: String,
-    @SerializedName("totaldeaths")
-    val totaldeaths: String
+    @SerializedName("totalCases")
+    val totalCases: String,
+    @SerializedName("totalDeaths")
+    val totalDeaths: String
 ) : Serializable

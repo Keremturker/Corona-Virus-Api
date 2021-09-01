@@ -42,7 +42,7 @@ class FragmentList : Fragment() {
         subscribe()
         binding.swipeRefreshLayout.setOnRefreshListener {
             binding.swipeRefreshLayout.isRefreshing = false
-            viewModel.getList(false)
+            viewModel.getList()
         }
 
     }
@@ -73,9 +73,13 @@ class FragmentList : Fragment() {
 
         viewModel.onLoading.observe(viewLifecycleOwner) {
             if (it) {
-                binding.pbLoading.visibility = View.VISIBLE
+                binding.rvList.visibility = View.GONE
+                binding.shimmerFrameLayout.visibility = View.VISIBLE
+                binding.shimmerFrameLayout.startShimmer()
             } else {
-                binding.pbLoading.visibility = View.GONE
+                binding.shimmerFrameLayout.stopShimmer()
+                binding.shimmerFrameLayout.visibility = View.GONE
+                binding.rvList.visibility = View.VISIBLE
             }
         }
     }

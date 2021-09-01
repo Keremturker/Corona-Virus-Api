@@ -20,6 +20,7 @@ class CountriesListAdapter(private val onClickAction: (CountriesResponseItem) ->
 
         fun bind(item: CountriesResponseItem) {
             itemBinding.txtCountryName.text = item.country
+            itemBinding.txtTotalCase.text = item.totalCases
 
             itemBinding.root.setOnClickListener {
                 onClickAction.invoke(item)
