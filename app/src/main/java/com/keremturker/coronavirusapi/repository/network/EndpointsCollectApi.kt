@@ -9,6 +9,6 @@ import retrofit2.http.POST
 interface EndpointsCollectApi {
 
     @POST("/corona/countriesData")
-    suspend fun countriesData(@Body request: CountriesDataRequest): CountriesDataResponse
+    suspend fun countriesData(@Body request: CountriesDataRequest = CountriesDataRequest("")): CountriesDataResponse
 
 }

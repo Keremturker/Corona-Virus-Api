@@ -3,7 +3,7 @@ package com.keremturker.coronavirusapi.repository.entity.response
 
 import com.google.gson.annotations.SerializedName
 
-data class Result(
+data class CountriesResponseItem(
     @SerializedName("activeCases")
     val activeCases: String,
     @SerializedName("country")
