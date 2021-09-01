@@ -9,8 +9,9 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.keremturker.coronavirusapi.R
 import com.keremturker.coronavirusapi.databinding.FragmentListBinding
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class FragmentList : Fragment() {
     lateinit var binding: FragmentListBinding
     val viewModel: ListVM by viewModels()
@@ -27,5 +28,7 @@ class FragmentList : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.txtMessage.text = "Kerem Türker"
+
+        viewModel.getList()
     }
 }
