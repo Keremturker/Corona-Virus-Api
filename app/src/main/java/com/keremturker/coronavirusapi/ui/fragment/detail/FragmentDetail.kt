@@ -7,6 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import com.keremturker.coronavirusapi.databinding.FragmentDetailBinding
+import com.keremturker.coronavirusapi.repository.entity.response.CountriesResponseItem
+import com.keremturker.coronavirusapi.ui.fragment.list.items
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -14,8 +16,7 @@ class FragmentDetail : Fragment() {
 
     lateinit var binding: FragmentDetailBinding
     val viewModel: DetailVM by viewModels()
-
-    override fun onCreateView(
+     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
@@ -26,5 +27,9 @@ class FragmentDetail : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val item = arguments?.getSerializable(items) as CountriesResponseItem?
+
+        binding.txtCountryName.text = item?.country
+
     }
 }

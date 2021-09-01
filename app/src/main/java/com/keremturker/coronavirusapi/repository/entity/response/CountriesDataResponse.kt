@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 
 data class CountriesDataResponse(
     @SerializedName("result")
-    val result: List<CountriesResponseItem>?,
+    val result: MutableList<CountriesResponseItem>?,
     @SerializedName("success")
     val success: Boolean
 )

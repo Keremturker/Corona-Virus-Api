@@ -24,11 +24,14 @@ class ListVM
     val app: Application
 ) : AndroidViewModel(app) {
 
-    private val _onGetCountriesSuccessLD = MutableLiveData<List<CountriesResponseItem>>()
-    val onGetCountriesLD: LiveData<List<CountriesResponseItem>> get() = _onGetCountriesSuccessLD
+    private val _onGetCountriesSuccessLD = MutableLiveData<MutableList<CountriesResponseItem>>()
+    val onGetCountriesLD: LiveData<MutableList<CountriesResponseItem>> get() = _onGetCountriesSuccessLD
 
+    init {
+        getList()
+    }
 
-    fun getList() {
+    private fun getList() {
 
         viewModelScope.launch {
             var result: Result<CountriesDataResponse>? = null
@@ -58,13 +61,13 @@ class ListVM
         }
     }
 
-    private fun onGetCountries(response: List<CountriesResponseItem>?) {
+    private fun onGetCountries(response: MutableList<CountriesResponseItem>?) {
         response?.let {
             _onGetCountriesSuccessLD.postValue(it)
-        }
+        } ?: _onGetCountriesSuccessLD.postValue(mutableListOf())
     }
 
     private fun onError(message: String?) {
-        Log.d("test123", message ?: "Error")
+        _onGetCountriesSuccessLD.postValue(mutableListOf())
     }
 }
