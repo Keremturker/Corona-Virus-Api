@@ -40,6 +40,10 @@ class FragmentList : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         prepareRecyclerView()
         subscribe()
+        binding.swipeRefreshLayout.setOnRefreshListener {
+            binding.swipeRefreshLayout.isRefreshing = false
+            viewModel.getList(false)
+        }
 
     }
 
@@ -64,6 +68,14 @@ class FragmentList : Fragment() {
                 binding.rvList.visibility = View.VISIBLE
                 binding.txtNotFound.visibility = View.GONE
                 countriesListAdapter.updateList(it)
+            }
+        }
+
+        viewModel.onLoading.observe(viewLifecycleOwner) {
+            if (it) {
+                binding.pbLoading.visibility = View.VISIBLE
+            } else {
+                binding.pbLoading.visibility = View.GONE
             }
         }
     }

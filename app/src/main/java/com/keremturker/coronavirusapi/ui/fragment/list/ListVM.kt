@@ -27,12 +27,15 @@ class ListVM
     private val _onGetCountriesSuccessLD = MutableLiveData<MutableList<CountriesResponseItem>>()
     val onGetCountriesLD: LiveData<MutableList<CountriesResponseItem>> get() = _onGetCountriesSuccessLD
 
+    private val _onLoading = MutableLiveData<Boolean>()
+    val onLoading: LiveData<Boolean> get() = _onLoading
+
     init {
         getList()
     }
 
-    private fun getList() {
-
+    fun getList(loadingProgress: Boolean = true) {
+        _onLoading.postValue(loadingProgress)
         viewModelScope.launch {
             var result: Result<CountriesDataResponse>? = null
             try {
@@ -50,9 +53,8 @@ class ListVM
                 } else {
                     val resultException = result.exceptionOrNull()
                     val errorMessage = resultException?.message
-                    if (resultException != null) {
-                        onError(errorMessage)
-                    }
+                    onError(errorMessage)
+
                 }
 
             } catch (e: Exception) {
@@ -62,12 +64,15 @@ class ListVM
     }
 
     private fun onGetCountries(response: MutableList<CountriesResponseItem>?) {
+        _onLoading.postValue(false)
+
         response?.let {
             _onGetCountriesSuccessLD.postValue(it)
         } ?: _onGetCountriesSuccessLD.postValue(mutableListOf())
     }
 
     private fun onError(message: String?) {
+        _onLoading.postValue(false)
         _onGetCountriesSuccessLD.postValue(mutableListOf())
     }
 }
