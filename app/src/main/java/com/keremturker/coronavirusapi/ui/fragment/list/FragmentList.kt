@@ -14,6 +14,7 @@ import com.keremturker.coronavirusapi.databinding.FragmentListBinding
 import com.keremturker.coronavirusapi.repository.entity.response.CountriesResponseItem
 import com.keremturker.coronavirusapi.ui.activity.MainActivity
 import com.keremturker.coronavirusapi.ui.fragment.list.adapter.CountriesListAdapter
+import com.keremturker.coronavirusapi.util.onRefresh
 import dagger.hilt.android.AndroidEntryPoint
 import java.io.Serializable
 
@@ -41,11 +42,10 @@ class FragmentList : Fragment() {
 
         prepareRecyclerView()
         subscribe()
-        binding.swipeRefreshLayout.setOnRefreshListener {
-            binding.swipeRefreshLayout.isRefreshing = false
+
+        binding.swipeRefreshLayout.onRefresh {
             viewModel.getList()
         }
-
     }
 
     private fun prepareRecyclerView() {

@@ -10,6 +10,7 @@ import com.keremturker.coronavirusapi.databinding.FragmentDetailBinding
 import com.keremturker.coronavirusapi.repository.entity.response.CountriesResponseItem
 import com.keremturker.coronavirusapi.ui.activity.MainActivity
 import com.keremturker.coronavirusapi.ui.fragment.list.items
+import com.keremturker.coronavirusapi.util.emptyItemCheck
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -29,19 +30,15 @@ class FragmentDetail : Fragment() {
         val item = arguments?.getSerializable(items) as CountriesResponseItem?
         (activity as MainActivity?)?.setBackButton()
 
-        binding.txtCountryName.text = item?.country.emptyItemCheck()
-        binding.txtTotalCase.text = item?.totalCases.emptyItemCheck()
-        binding.txtNewCase.text = item?.newCases.emptyItemCheck()
-        binding.txtTotalDeaths.text = item?.totalDeaths.emptyItemCheck()
-        binding.txtNewDeaths.text = item?.newDeaths.emptyItemCheck()
-        binding.txtTotalRecovered.text = item?.totalRecovered.emptyItemCheck()
-        binding.txtActiveCases.text = item?.activeCases.emptyItemCheck()
+        binding.txtCountryName.text = item?.country.emptyItemCheck(requireContext())
+        binding.txtTotalCase.text = item?.totalCases.emptyItemCheck(requireContext())
+        binding.txtNewCase.text = item?.newCases.emptyItemCheck(requireContext())
+        binding.txtTotalDeaths.text = item?.totalDeaths.emptyItemCheck(requireContext())
+        binding.txtNewDeaths.text = item?.newDeaths.emptyItemCheck(requireContext())
+        binding.txtTotalRecovered.text = item?.totalRecovered.emptyItemCheck(requireContext())
+        binding.txtActiveCases.text = item?.activeCases.emptyItemCheck(requireContext())
     }
 
-    private fun String?.emptyItemCheck() = if (this.isNullOrEmpty()) {
-        getString(R.string.none)
-    } else {
-        this
-    }
+
 
 }
