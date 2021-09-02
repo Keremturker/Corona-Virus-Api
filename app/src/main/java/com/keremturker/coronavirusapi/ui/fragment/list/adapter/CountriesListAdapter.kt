@@ -38,7 +38,7 @@ class CountriesListAdapter(private val onClickAction: (CountriesResponseItem) ->
     }
 
     override fun onBindViewHolder(holder: CountriesHolder, position: Int) {
-        val item: CountriesResponseItem = data[position] ?: return
+        val item: CountriesResponseItem = data[position]
         holder.bind(item)
     }
 

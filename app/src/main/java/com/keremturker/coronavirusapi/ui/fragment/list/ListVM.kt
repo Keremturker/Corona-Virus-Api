@@ -1,12 +1,10 @@
 package com.keremturker.coronavirusapi.ui.fragment.list
 
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.keremturker.coronavirusapi.repository.entity.request.CountriesDataRequest
 import com.keremturker.coronavirusapi.repository.entity.response.CountriesDataResponse
 import com.keremturker.coronavirusapi.repository.entity.response.CountriesResponseItem
 import com.keremturker.coronavirusapi.repository.network.APIClient
@@ -14,7 +12,6 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import retrofit2.HttpException
 import javax.inject.Inject
 
 @HiltViewModel
@@ -37,7 +34,7 @@ class ListVM
     fun getList() {
         _onLoading.postValue(true)
         viewModelScope.launch {
-            var result: Result<CountriesDataResponse>? = null
+            val result: Result<CountriesDataResponse>?
             try {
                 result =
                     withContext(Dispatchers.IO) {
@@ -51,14 +48,11 @@ class ListVM
                         onGetCountries(objectT.result)
                     }
                 } else {
-                    val resultException = result.exceptionOrNull()
-                    val errorMessage = resultException?.message
-                    onError(errorMessage)
-
+                    onError()
                 }
 
             } catch (e: Exception) {
-                onError(result?.exceptionOrNull()?.message)
+                onError()
             }
         }
     }
@@ -71,7 +65,7 @@ class ListVM
         } ?: _onGetCountriesSuccessLD.postValue(mutableListOf())
     }
 
-    private fun onError(message: String?) {
+    private fun onError() {
         _onLoading.postValue(false)
         _onGetCountriesSuccessLD.postValue(mutableListOf())
     }

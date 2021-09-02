@@ -2,5 +2,11 @@
     <string name="app_name">Corona Virus Api</string>
     <string name="not_found">Veri Bulunamadı</string>
     <string name="country_name">Country Name:</string>
-    <string name="total_case">Total Case:</string>
+    <string name="total_cases">Total Cases:</string>
+    <string name="new_cases">New Cases:</string>
+    <string name="total_deaths">Total Deaths:</string>
+    <string name="new_deaths">New Deaths:</string>
+    <string name="total_recovered">Total Recovered:</string>
+    <string name="active_cases">Active Cases:</string>
+    <string name="none">None</string>
 </resources>

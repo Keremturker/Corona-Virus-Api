@@ -5,22 +5,21 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.viewModels
+import com.keremturker.coronavirusapi.R
 import com.keremturker.coronavirusapi.databinding.FragmentDetailBinding
 import com.keremturker.coronavirusapi.repository.entity.response.CountriesResponseItem
+import com.keremturker.coronavirusapi.ui.activity.MainActivity
 import com.keremturker.coronavirusapi.ui.fragment.list.items
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class FragmentDetail : Fragment() {
 
-    lateinit var binding: FragmentDetailBinding
-    val viewModel: DetailVM by viewModels()
-     override fun onCreateView(
+    private lateinit var binding: FragmentDetailBinding
+    override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        // Inflate the layout for this fragment
         binding = FragmentDetailBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -28,8 +27,21 @@ class FragmentDetail : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val item = arguments?.getSerializable(items) as CountriesResponseItem?
+        (activity as MainActivity?)?.setBackButton()
 
-        binding.txtCountryName.text = item?.country
-
+        binding.txtCountryName.text = item?.country.emptyItemCheck()
+        binding.txtTotalCase.text = item?.totalCases.emptyItemCheck()
+        binding.txtNewCase.text = item?.newCases.emptyItemCheck()
+        binding.txtTotalDeaths.text = item?.totalDeaths.emptyItemCheck()
+        binding.txtNewDeaths.text = item?.newDeaths.emptyItemCheck()
+        binding.txtTotalRecovered.text = item?.totalRecovered.emptyItemCheck()
+        binding.txtActiveCases.text = item?.activeCases.emptyItemCheck()
     }
+
+    private fun String?.emptyItemCheck() = if (this.isNullOrEmpty()) {
+        getString(R.string.none)
+    } else {
+        this
+    }
+
 }
